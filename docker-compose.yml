@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    image: collector:latest
+    build:
+      context: .
+      dockerfile: cmd/collector/Dockerfile
+    environment:
+      CAMERA_COUNT: 3
+      MAX_CONCURRENT: 2
+      CAMERA_BASE_URL: http://camera:8080
+      TARGET_URL: http://target:8080/image
+      POLL_INTERVAL: 5s
+    depends_on:
+      - camera
+      - target
+    networks:
+      - turnaround
+
+  camera:
+    image: camera:latest
+    build:
+      context: .
+      dockerfile: cmd/camera/Dockerfile
+    deploy:
+      mode: replicated
+      replicas: 3
+    ports:
+      - "8081-8083:8080"
+    networks:
+      - turnaround
+
+  target:
+    image: target:latest
+    build:
+      context: .
+      dockerfile: cmd/target/Dockerfile
+    ports:
+      - "8084:8080"
+    networks:
+      - turnaround
+
+networks:
+  turnaround:
+    driver: bridge
