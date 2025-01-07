@@ -45,3 +45,4 @@ jobs:
         if: always()
         run: | 
           make docker-down
+          make clean
