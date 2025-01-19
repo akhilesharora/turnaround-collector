@@ -16,9 +16,7 @@ Turnaround Collector is a highly available, Go-based system designed for fetchin
 ### Cloning the Repository
 
 ```bash
-# Public access is forbidden for now
-# git clone https://github.com/akhilesharora/turnaround-collector.git
-unzip turnaround-collector.zip
+git clone https://github.com/akhilesharora/turnaround-collector.git
 cd turnaround-collector
 ```
 
@@ -116,7 +114,7 @@ The Collector service can be configured using environment variables:
 ## Improvements
 
 - Retries and Circuit Breakers: This would make the system more reliable if things go wrong for a bit.
-- Persistent Storage : Saving processed images or info could unlock new uses.
+- Persistent Storage : Saving processed images can make metadata analyses easier.
 - Security: Authentication and encryption between services is key for real use.
 - Tracing: Distributed tracing would make debugging and performance analysis easier.
 
